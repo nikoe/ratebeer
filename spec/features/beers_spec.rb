@@ -5,6 +5,8 @@ include Helpers
 describe "Beer" do
   before :each do
     FactoryGirl.create :brewery
+    FactoryGirl.create :user
+    sign_in(username:"Pekka", password:"Foobar1")
   end
 
   it "can add new if name is added" do
@@ -24,7 +26,7 @@ describe "Beer" do
     select('anonymous', from:'beer[brewery_id]')
 
     click_button('Create Beer')
-    expect(User.count).to eq(0)
+    expect(Beer.count).to eq(0)
     expect(page).to have_content "Name can't be blank"
   end
 end
