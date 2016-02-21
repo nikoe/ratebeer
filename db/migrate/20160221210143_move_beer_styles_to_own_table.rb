@@ -12,7 +12,7 @@ class MoveBeerStylesToOwnTable < ActiveRecord::Migration
       style = Style.find_by name:style_name
 
       if not style.nil?
-        beer.style = style
+        beer.style_id = style.id
         beer.save
       end
     end
