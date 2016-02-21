@@ -6,13 +6,14 @@ describe "Beer" do
   before :each do
     FactoryGirl.create :brewery
     FactoryGirl.create :user
+    FactoryGirl.create :style
     sign_in(username:"Pekka", password:"Foobar1")
   end
 
   it "can add new if name is added" do
     visit new_beer_path
     fill_in('beer_name', with:'Tuoppi')
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('anonymous', from:'beer[brewery_id]')
 
     expect{
@@ -22,7 +23,7 @@ describe "Beer" do
 
   it "cannot add new if name not added" do
     visit new_beer_path
-    select('Lager', from:'beer[style]')
+    select('Lager', from:'beer[style_id]')
     select('anonymous', from:'beer[brewery_id]')
 
     click_button('Create Beer')

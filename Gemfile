@@ -66,11 +66,13 @@ group :test do
   gem 'factory_girl_rails'
   gem 'capybara'
   gem 'launchy'
+  gem 'webmock'
   gem 'simplecov', require: false
 end
 
 gem 'bcrypt', '~> 3.1.7'
 gem 'rspec-its'
+gem 'httparty'
 
 ruby '2.3.0'
 
