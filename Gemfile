@@ -70,6 +70,11 @@ group :test do
   gem 'simplecov', require: false
 end
 
+gem 'bootstrap-sass'
+group :development do
+  gem 'rails_layout'
+end
+
 gem 'bcrypt', '~> 3.1.7'
 gem 'rspec-its'
 gem 'httparty'

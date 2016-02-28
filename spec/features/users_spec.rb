@@ -42,7 +42,7 @@ describe "User" do
     visit user_path(user)
 
     expect(page).to have_content("anonymous")
-    expect(page).to have_content("Ratings")
+    expect(page).to have_content("Has made 1 rating")
 
   end
 

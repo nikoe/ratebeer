@@ -2,10 +2,19 @@
 
 <p> Number of ratings: <%= @ratings.count %> </p>
 
-<ul>
-  <% @ratings.each do |rating| %>
-      <li> <%= rating %> <%= link_to rating.user.username, rating.user %> </li>
-  <% end %>
-</ul>
+<p>Five recent ratings</p>
+<%= render 'list', list: Rating.recent(5) %>
+
+<p>Top 3 breweries by ratings</p>
+<%= render 'list', list: Brewery.top(3) %>
+
+<p>Top 3 beers by ratings</p>
+<%= render 'list', list: Beer.top(3) %>
+
+<p>Top 3 raters</p>
+<%= render 'list', list: User.top_raters(3).map{|r| r.keys[0]} %>
+
+<p>Top 3 styles</p>
+<%= render 'list', list:Style.top(3).map{|s| s.keys[0]} %>
 
 <%= link_to 'New Rating', new_rating_path %>

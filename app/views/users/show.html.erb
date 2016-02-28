@@ -1,24 +1,32 @@
 <p id="notice"><%= notice %></p>
 
-
-<h1><%= @user.username %></h1>
+<h2>
+  <%= @user.username %>
+  <% if @user.banned  %>
+      <span class="label label-info">account frozen</span>
+  <% end %>
+</h2>
 
 <p>
-  member of
-  <% @user.beer_clubs.each do |beer_club| %>
-      <%= link_to beer_club.name, beer_club %>
-  <% end %>
+  Has made <%= pluralize(@user.ratings.count, 'rating') %>
 </p>
 
-<p>
-  <% if @user.ratings.empty? %>
-      beer has not yet been rated!
-  <% else %>
-      Has made <%= @user.ratings.count %> <%= "rating".pluralize(@user.ratings.count) %>, average <%= @user.average_rating %>
-  <% end %>
-</p>
+<% if @user.ratings.any? %>
+    <p>Favorite style <%= @user.favorite_style.name %></p>
 
-<h2>Ratings</h2>
+    <p>Favorite brewery <%= @user.favorite_brewery.name %></p>
+<% end %>
+
+<% if @user.beer_clubs.any? %>
+    <p>
+      Member of
+      <% @user.beer_clubs.each do |club| %>
+          <%= link_to club.name, club %>
+      <% end %>
+    </p>
+<% else %>
+    <p>No club memberships</p>
+<% end %>
 
 <ul>
   <% @user.ratings.each do |rating| %>
@@ -32,7 +40,15 @@
 </ul>
 
 <% if @user == current_user %>
-    <%= link_to 'Edit', edit_user_path(@user) %> |
-    <%= link_to 'Delete', @user, method: :delete, data: { confirm: 'Are you sure?' } %> |
+    <%= link_to 'Delete account', @user, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-danger" %>
+    <%= link_to 'Edit', edit_user_path(@user), class: "btn btn-primary" %>
 <% end %>
-<%= link_to 'Back', users_path %>
+
+<% if not current_user.nil? and current_user.admin and not @user == current_user %>
+    <% if @user.banned %>
+        <% status = "reactivate account" %>
+    <% else %>
+        <% status = "freeze account" %>
+    <% end %>
+  <%= link_to status, toggle_banned_user_path(@user.id), method: :post, class: "btn btn-primary" %>
+<% end %>

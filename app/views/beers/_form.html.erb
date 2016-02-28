@@ -10,20 +10,25 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :name, for: 'beer_name' %><br>
+      <%= f.text_field :name, id: 'beer_name', class: 'form-control' %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :style_id %><br>
-    <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :name) %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :style_id, for:'beer_style_id' %><br>
+      <%= f.select :style_id, options_from_collection_for_select(@styles, :id, :name), {}, {:class=>"form-control"} %>
+    </div> 
   </div>
-  <div class="field">
-    <%= f.label :brewery_id %><br>
-    <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name) %>
+  <div class="form-group">
+    <div class="field">
+      <%= f.label :brewery_id, for:'beer_brewery_id' %><br>
+      <%= f.select :brewery_id, options_from_collection_for_select(@breweries, :id, :name), {}, {:class=>'form-control'} %>
+    </div>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit class:'btn btn-primary' %>
   </div>
 <% end %>

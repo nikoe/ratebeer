@@ -1,0 +1,11 @@
+<ul>
+  <% list.each do |item| %>
+      <% if item.instance_of? Rating %>
+        <li><%= item %></li>
+      <% elsif item.instance_of? User %>
+        <li><%= link_to item.username, item %></li>
+      <% else %>
+        <li><%= link_to item.name, item %></li>
+      <% end %>
+  <% end %>
+</ul>
