@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228182208) do
+ActiveRecord::Schema.define(version: 20160307183256) do
 
   create_table "beer_clubs", force: :cascade do |t|
     t.string   "name"
@@ -67,5 +67,7 @@ ActiveRecord::Schema.define(version: 20160228182208) do
     t.boolean  "admin"
     t.boolean  "banned"
   end
+
+  add_index "users", ["username"], name: "index_users_on_username"
 
 end

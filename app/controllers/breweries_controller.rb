@@ -1,13 +1,82 @@
 class BreweriesController < ApplicationController
   before_action :set_brewery, only: [:show, :edit, :update, :destroy]
-  before_action :ensure_that_signed_in, except: [:index, :show]
+  before_action :ensure_that_signed_in, except: [:index, :show, :nglist]
 
 
   # GET /breweries
   # GET /breweries.json
   def index
+    @breweries = Brewery.all
     @active_breweries = Brewery.active
     @retired_breweries = Brewery.retired
+
+
+    order = params[:order] || 'name'
+    @o = params[:o] || 'asc'
+    list = params[:list]
+
+    if list == "active"
+      @active_breweries = case order
+                            when 'name' then
+                              if @o == 'asc'
+                                @active_breweries.sort_by{ |b| b.name }
+                              else
+                                @active_breweries.sort_by{ |b| b.name }.reverse!
+                              end
+                            when 'year' then
+                              if @o == 'asc'
+                                @active_breweries.sort_by{ |b| b.year }
+                              else
+                                @active_breweries.sort_by{ |b| b.year }.reverse!
+                              end
+                          end
+
+    else if list == "retired"
+           @retired_breweries = case order
+                                 when 'name' then
+                                   if @o == 'asc'
+                                     @retired_breweries.sort_by{ |b| b.name }
+                                   else
+                                     @retired_breweries.sort_by{ |b| b.name }.reverse!
+                                   end
+                                 when 'year' then
+                                   if @o == 'asc'
+                                     @retired_breweries.sort_by{ |b| b.year }
+                                   else
+                                     @retired_breweries.sort_by{ |b| b.year }.reverse!
+                                   end
+                               end
+         else
+           @active_breweries = case order
+                                 when 'name' then
+                                   if @o == 'asc'
+                                     @active_breweries.sort_by{ |b| b.name }
+                                   else
+                                     @active_breweries.sort_by{ |b| b.name }.reverse!
+                                   end
+                                 when 'year' then
+                                   if @o == 'asc'
+                                     @active_breweries.sort_by{ |b| b.year }
+                                   else
+                                     @active_breweries.sort_by{ |b| b.year }.reverse!
+                                   end
+                               end
+           @retired_breweries = case order
+                                  when 'name' then
+                                    if @o == 'asc'
+                                      @retired_breweries.sort_by{ |b| b.name }
+                                    else
+                                      @retired_breweries.sort_by{ |b| b.name }.reverse!
+                                    end
+                                  when 'year' then
+                                    if @o == 'asc'
+                                      @retired_breweries.sort_by{ |b| b.year }
+                                    else
+                                      @retired_breweries.sort_by{ |b| b.year }.reverse!
+                                    end
+                                end
+         end
+      end
   end
 
   # GET /breweries/1
@@ -15,6 +84,9 @@ class BreweriesController < ApplicationController
   def show
   end
 
+  def nglist
+
+  end
   # GET /breweries/new
   def new
     @brewery = Brewery.new

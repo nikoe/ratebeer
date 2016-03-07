@@ -1,25 +1,28 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Listing Users</h1>
+<h1>Users</h1>
 
 <table class="table table-hover">
   <thead>
-    <tr>
-      <th>Username</th>
-      <th colspan="3"></th>
-    </tr>
+  <tr>
+    <th>Username</th>
+    <th> rated beers </th>
+    <th> total ratings </th>
+    <th></th>
+  </tr>
   </thead>
-
   <tbody>
-    <% @users.each do |user| %>
+  <% @users.each do |user| %>
       <tr>
         <td><%= link_to user.username, user %></td>
-        <% if user.banned %>
-          <td><span class="label label-primary">account frozen</span></td>
-        <% else %>
-          <td></td>
-        <% end %>
+        <td><%= user.beers.size %></td>
+        <td><%= user.ratings.size %></td>
+        <td>
+          <% if user.banned? %>
+              <span class="label label-info">account frozen</span>
+          <% end %>
+        </td>
       </tr>
-    <% end %>
+  <% end %>
   </tbody>
 </table>

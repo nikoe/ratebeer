@@ -68,6 +68,7 @@ group :test do
   gem 'launchy'
   gem 'webmock'
   gem 'simplecov', require: false
+  gem 'database_cleaner'
 end
 
 gem 'bootstrap-sass'
@@ -78,6 +79,9 @@ end
 gem 'bcrypt', '~> 3.1.7'
 gem 'rspec-its'
 gem 'httparty'
+gem 'jquery-turbolinks'
+gem 'selenium-webdriver'
+gem 'rack-mini-profiler'
 
 ruby '2.3.0'
 

@@ -1,3 +1,5 @@
+<% cache @brewery do %>
+
 <h2><%= @brewery.name %>
   <% if not @brewery.active  %>
       <span class="label label-info">retired</span>
@@ -24,7 +26,7 @@
 <% end %>
 
 <%= link_to "change activity", toggle_activity_brewery_path(@brewery.id), method: :post, class: "btn btn-primary" %>
-
+<% end %>
 <% if current_user %>
     <%= edit_and_destroy_buttons(@brewery) %>
 <% end %>

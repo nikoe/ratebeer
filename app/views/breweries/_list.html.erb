@@ -1,8 +1,15 @@
 <table class="table table-hover">
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Year</th>
+    <%
+      if o == "asc"
+        o = "desc"
+      else if o == "desc"
+        o ="asc" end
+      end
+    %>
+    <th> <%= link_to 'Name', breweries_path(order:"name", list: list, o: o) %> </th>
+    <th> <%= link_to 'Year', breweries_path(order:"year", list: list, o: o) %> </th>
   </tr>
   </thead>
 
